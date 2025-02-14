@@ -21,5 +21,7 @@ import account.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/',include('account.urls')),
+    path('client/',include('client.urls')),
+    path('writer/',include('writer.urls')),
     path('', account.views.home, name='home'),
 ]

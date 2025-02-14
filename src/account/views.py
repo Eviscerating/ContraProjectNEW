@@ -5,7 +5,7 @@ from asgiref.sync import sync_to_async
 import django.contrib.auth as auth
 
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
-from common.django_utils import arender
+from common.django_utils import arender, alogout
 from .models import CustomUser
 
 
@@ -31,21 +31,23 @@ async def login(request:HttpRequest) -> HttpResponse:
       if await form.ais_valid():
          email = request.POST['username']
          passwd = request.POST['password']
-         user: CustomUser | None = await auth.aauthenticate(
+         user: CustomUser | None = await sync_to_async(auth.authenticate)(
                                  request, 
                                  email=email, 
                                  password=passwd,
-                                 )
+         )
          
          if user:
-            await auth.alogin(request, user)
-            msg= (
-               'Thanks for returning, Writer' if user.is_writer
-               else 'Welcome back, Client'
+            await sync_to_async(auth.login)(request, user)
+            return redirect(
+               'writer-dashboard' if user.is_writer else 'client-dashboard'
             )
-            return HttpResponse(msg)
    else:
       form = CustomAuthenticationForm()
             
    context = {'login_form': form}
    return await arender (request, 'account/login.html', context)
+
+async def logout(request: HttpRequest)-> HttpResponse:
+   await alogout(request)
+   return redirect('/')
