@@ -41,36 +41,37 @@
 
         <div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto">
-                &nbsp;     &nbsp;     &nbsp; 
                 <li class="nav-item">
                     <a class="btn btn-secondary navbar-btn" type="button"  
-                        href="{% url 'register' %}">{% translate 'Register'%}</a>
+                        href="{% url 'register' %}">{% translate 'Dashboard'%}</a>
                 </li>
-                &nbsp;     &nbsp;     &nbsp; 
                 <li class="nav-item">
                     <a class="btn btn-secondary navbar-btn" type="button"  
-                        href="{% url 'login' %}">{% translate 'Login'%}</a>
+                        href="{% url 'login' %}">{% translate 'Create article'%}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-secondary navbar-btn" type="button"  
+                        href="{% url 'login' %}">{% translate 'My articles'%}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-secondary navbar-btn" type="button"  
+                        href="{% url 'login' %}">{% translate 'Account settings'%}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-secondary navbar-btn" type="button"  
+                        href="{% url 'login' %}">{% translate 'Create article'%}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-secondary navbar-btn" type="button"  
+                        href="{% url 'login' %}">{% translate 'Logout'%}</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <br>
-    <br>
+    {% block content %}
 
-    <div class="text-center">
-        <h5>
-            Obtenha acesso a perspectivas únicas e rentáveis sobre os 
-            mercados de capitais!
-        </h5>
-        <br>
-        <p> Aceda à nossa colecção exclusiva e selecionada de relatórios e artigos. </p>
-        <br>
-        <a class="btn btn-success" type="button"  href="{% url 'register' %}">
-            <i class="fa fa-angle-right" aria-hidden="true"></i> 
-            {%translate 'Get Started' %}
-        </a>
-    </div>
+    {% endblock %}
 </body>
 </html>
 
