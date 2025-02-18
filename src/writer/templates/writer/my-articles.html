@@ -1,0 +1,20 @@
+{% extends 'writer/_main.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content%}
+    {% for article in my_articles %}
+    <div class ="container bg-white shadow mt-5 p-5 form_layout">
+        <h3>{{ article.title }}</h3>
+        <p>
+            {{ article.content }}
+        </p>
+        <hr>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <em>{{ article.date_posted }}</em>
+            <a href="{ article.id }" class="btn btn-link btn-light">{% translate 'Edit article' %}</a>
+        </div>
+    </div>
+    {%endfor%}
+{% endblock %}

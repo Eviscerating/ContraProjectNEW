@@ -1,0 +1,15 @@
+{% extends 'writer/_main.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block content%}
+    <div class ="container bg-white shadow mt-5 p-5 form_layout">
+        <h3>{% translate 'Create article' %}</h3>
+        <p>{% translate "Let's go ahead and create an article below:" %}</p>
+
+        <form method="POST" autocomplete="off">
+            {% csrf_token %}
+            {{ create_article_form|crispy }}
+            <input type="submit" class="btn btn-success" value="{% translate 'Create article' %}">
+        </form>    
+    </div>
+{% endblock %}
