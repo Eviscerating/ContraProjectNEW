@@ -13,8 +13,10 @@
 
         <div class="d-flex justify-content-between align-items-center">
             <em>{{ article.date_posted }}</em>
-            <a href="{ article.id }" class="btn btn-link btn-light">{% translate 'Edit article' %}</a>
-        </div>
+            <a href="{% url 'update-article' article.id %}" class="btn btn-link btn-light">
+                {% translate 'Update article' %}
+            </a>
+         </div>
     </div>
-    {%endfor%}
+    {% endfor %}
 {% endblock %}

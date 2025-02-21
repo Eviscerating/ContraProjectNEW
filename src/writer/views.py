@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
-
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import aget_user
 
 from .forms import ArticleForm
 from common.django_utils import arender
-from common.auth import awriter_required
+from common.auth import awriter_required, ensure_for_current_user
 from .models import Article
 
 @awriter_required
@@ -35,3 +35,22 @@ async def my_articles(request: HttpRequest) -> HttpResponse:
     articles = Article.objects.filter(user=user)
     context = {'my_articles': articles}
     return await arender(request, 'writer/my-articles.html', context)
+
+
+
+@awriter_required
+@ensure_for_current_user(Article, redirect_if_missing = 'my_articles')
+async def update_article(request: HttpRequest, article: Article) -> HttpResponse:
+    print("ENTRDA UPDATE_ARTICLE")    
+    if request.method=='POST':
+        form = ArticleForm(request.POST, instance = article)
+        if await form.ais_valid():
+            await form.asave()
+            return redirect('my-articles')
+    else:
+        print("!!!!!!!!!  AQUI")
+        form = ArticleForm(instance = article)
+        
+    context = {'update_article_form': form}
+    return await arender(request, 'writer/update-article.html', context)
+        
