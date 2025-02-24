@@ -1,3 +1,8 @@
-<h1>Client Dashboard</h1>
+{% extends 'client/_main.html' %}
+{% load i18n %}
 
-<a href="{% url 'logout' %}">logout</a>
+{% block content%}
+<div class ="container bg-white shadow mt-5 p-5 form_layout text_center">
+    <h3> {%translate 'Welcome back,' %} {{ user.first_name }}</h3>
+</div>
+{% endblock %}

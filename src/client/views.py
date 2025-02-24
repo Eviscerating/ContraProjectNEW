@@ -1,14 +1,12 @@
-from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
-
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import aget_user # type: ignore
+from django.contrib.auth import aget_user
 
+from common.django_utils import arender 
 from common.auth import aclient_required
 
 @aclient_required
-@login_required(login_url = 'login') # type: ignore
 async def dashboard(request: HttpRequest) -> HttpResponse:
     
-        return render(request, 'client/dashboard.html')
+        return arender(request, 'client/dashboard.html')
 
