@@ -23,7 +23,14 @@
             <a href="{% url 'update-article' article.id %}" class="btn btn-link btn-light">
                 {% translate 'Update article' %}
             </a>
+            <a href="{% url 'delete-article' article.id %}" class="btn btn-light">
+                {% translate 'Delete article' %}
+            </a>
          </div>
+            <a href="{% url 'delete-article' article.id %}" class="btn btn-link btn-light">
+                {% translate 'Delete article' %}
+            </a>
+        </div>
     </div>
     {% endfor %}
 {% endblock %}

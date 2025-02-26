@@ -3,6 +3,13 @@
 
 {% block content%}
 <div class ="container bg-white shadow mt-5 p-5 form_layout text_center">
-    <h3> {%translate 'Welcome back,' %} {{ user.first_name }}</h3>
+    <h3> 📖 {%translate 'Welcome back,' %} {{ user.first_name }}</h3>
 </div>
+
+<div class ="container bg-white shadow mt-5 p-5 form_layout text_center">
+    <h5>{%translate 'Subscription status:' %}</h5>
+    <hr>
+    <p>
+        {% translate subscription_plan %}
+    </p>
 {% endblock %}
