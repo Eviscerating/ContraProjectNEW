@@ -2,10 +2,15 @@ body{
     background-color: #cacaca;
 }
 
-.form-layout{
+.form-layout, .paypal-form-layout{
     max-width: 600px;
     border-radius: 10px;
 }
+
+.paypal-form-layout{
+    max-width: 500px;
+}
+ 
 
 .article-info{
     display: flex;

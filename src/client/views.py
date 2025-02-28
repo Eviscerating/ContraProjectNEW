@@ -42,3 +42,17 @@ async def browse_articles(request: HttpRequest) -> HttpResponse:
     context = {'has_subscription': has_subscription, 'articles': articles}
     return await arender(request, 'client/browse-articles.html', context)
 
+@aclient_required
+async def subscribe_plan(request: HttpRequest) -> HttpResponse:
+    return await arender (request, 'client/subscribe-plan.html')
+
+@aclient_required
+async def update_user(request: HttpRequest) -> HttpResponse:
+    user = await aget_user (request)
+    subscription = None
+    try:
+        subscription = plan = await Subscription.objects.aget(user = user, is_active = True)
+    except ObjectDoesNotExist:
+        pass
+    context = {'has_subscription': subscription is not None}
+    return await arender (request, 'client/update-user.html', context)

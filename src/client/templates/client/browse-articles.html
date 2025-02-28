@@ -29,6 +29,16 @@
 {% else %}
     <div class ="container bg-white shadow mt-5 p-5 form_layout">
         <h5>📖 {%translate 'Hi! Thanks for being a registered user!' %}</h5>
+        <p>
         <strong><em>🔒 {%translate 'Subscribe to access premium articles' %}</em></strong>
+        </p>
+
+        <hr>
+        <p class="mt-4 text-center">
+            <a href="{% url 'subscribe-plan' %}" class="btn btn-info">
+                {% translate 'View subscription plans' %}
+            </a>
+        </p>
+    </div>
 {% endif %}
 {% endblock content %}

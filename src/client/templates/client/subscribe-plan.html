@@ -1,0 +1,71 @@
+{% extends 'client/_main.html' %}
+{% load i18n %}
+
+{% block content%}
+<div class ="container bg-white shadow mb-4 mt-3 p-5 form_layout text_center">
+    <h5> {%translate 'Subscription plans' %}</h5>
+</div>
+
+    <div class="row ps-4 pe-4">
+        <div class ="container bg-white shadow mt-3 p-4 paypal-form-layout text_center">
+            <h5>{%translate 'Standard Subscription' %}</h5>
+            <hr>
+            <p>{%translate 'Get access to standard articles and reports' %}</p>
+            <p><em>{% translate '(Limited Acess)'%}</em> </p>
+        <div id="paypal-button-container-P-5BM01985LP812882RM7AZCKY"></div>
+        <script src="https://www.paypal.com/sdk/js?client-id=AWm-h-cl6lxMbX86IKoN95105Zr0AwMAMn3HxizJeB7yuBVgJ99X6XB87q4yalG_LW_LUljiLCUtY4Lg&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+        <script>
+        paypal.Buttons({
+            style: {
+                shape: 'pill',
+                color: 'blue',
+                layout: 'vertical',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+                return actions.subscription.create({
+                /* Creates the subscription */
+                plan_id: 'P-5BM01985LP812882RM7AZCKY'
+                });
+            },
+            onApprove: function(data, actions) {
+                alert(data.subscriptionID); // You can add optional success message for the subscriber here
+            }
+        }).render('#paypal-button-container-P-5BM01985LP812882RM7AZCKY'); // Renders the PayPal button
+        </script>
+    </div>
+
+
+
+
+
+    <div class ="container bg-white shadow mt-3 p-4 paypal-form-layout text_center">
+        <h5>{%translate 'Premium Subscription' %}</h5>
+        <hr>
+        <p>{%translate 'Higly regarded premium articles and reports.' %}</p>
+        <p><em>{% translate '(Full Acess)'%}</em> </p>
+
+        <div id="paypal-button-container-P-567491461D224103GM7A2DMQ"></div>
+            <script src="https://www.paypal.com/sdk/js?g&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+            <script>
+            paypal.Buttons({
+                style: {
+                    shape: 'pill',
+                    color: 'gold',
+                    layout: 'vertical',
+                    label: 'subscribe'
+                },
+                createSubscription: function(data, actions) {
+                    return actions.subscription.create({
+                    /* Creates the subscription */
+                    plan_id: 'P-567491461D224103GM7A2DMQ'
+                    });
+                },
+                onApprove: function(data, actions) {
+                    alert(data.subscriptionID); // You can add optional success message for the subscriber here
+                }
+            }).render('#paypal-button-container-P-567491461D224103GM7A2DMQ'); // Renders the PayPal button
+            </script>
+        </div>
+    </div>
+{% endblock %}
