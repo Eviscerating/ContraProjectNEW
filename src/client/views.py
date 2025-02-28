@@ -56,3 +56,29 @@ async def update_user(request: HttpRequest) -> HttpResponse:
         pass
     context = {'has_subscription': subscription is not None}
     return await arender (request, 'client/update-user.html', context)
+
+
+@aclient_required
+async def create_subscription(request: HttpRequest, sub_id:str, plan: str) -> HttpResponse:
+    plan_choice = PlanChoices(plan)
+    user = await aget_user(request)
+    await Subscription.objects.acreate(
+        plan = plan_choice.value,
+        cost = '3.0' if plan_choice == PlanChoices.STANDARD else '9.00',
+        payment_provider_id = sub_id,
+        is_active = True,
+        user = user,
+    )
+    context = {'subscription_plan': plan_choice.label}
+    return await arender (request, 'client/create-subscription.html', context)
+
+"""
+class Subscription(models.Model):
+    plan = models.CharField(max_length=2, choices=PlanChoices, default = PlanChoices.STANDARD)
+    cost = models.DecimalField(max_digits=5, decimal_places=2, verbose_name=_t('Cost'))
+    payment_provider_id = models.CharField(
+        max_length=EXTERNAL_ID_MAX_LEN, verbose_name=_t('Payment Provider ID')
+    )
+    is_active = models.BooleanField(default=False)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+"""

@@ -29,8 +29,9 @@
                 });
             },
             onApprove: function(data, actions) {
-                alert(data.subscriptionID); // You can add optional success message for the subscriber here
-            }
+                let url_path = `/client/create-subscription/${data.subscriptionID}/ST`;
+                window.open(url_path, '_self');
+            },
         }).render('#paypal-button-container-P-5BM01985LP812882RM7AZCKY'); // Renders the PayPal button
         </script>
     </div>
@@ -62,8 +63,9 @@
                     });
                 },
                 onApprove: function(data, actions) {
-                    alert(data.subscriptionID); // You can add optional success message for the subscriber here
-                }
+                    let url_path = `/client/create-subscription/${data.subscriptionID}/PR`;
+                    window.open(url_path, '_self');
+                },
             }).render('#paypal-button-container-P-567491461D224103GM7A2DMQ'); // Renders the PayPal button
             </script>
         </div>
