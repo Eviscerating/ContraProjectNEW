@@ -1,73 +1,39 @@
-<!--
-    https://docs.djangoproject.com/en/5.1/ref/templates/language/
--->
-{% load i18n%}
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title> The Contrarian Report - Writers </title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width-device-width, initial-scale=1, maximum-scale=1"/>
-    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/lux/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+{% extends 'common/_main.html' %}
+{% load i18n %}
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-        crossorigin="anonymous"
-        defer="true">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"
-        defer="true">
-    </script>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-center">
-        <a class="navbar-brand main-heading"> 
-            &nbsp; The Contrarian Report 
-        </a>
-        <button class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-        >
-            <span class="navbar-toggler-icon"></span>
-        </button>
+{% block tab_title %} Writer - The Contrarian Report {% endblock %}
 
-        <div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="btn btn-secondary navbar-btn" type="button"  
-                        href="{% url 'writer-dashboard' %}">{% translate 'Dashboard'%}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-secondary navbar-btn" type="button"  
-                        href="{% url 'create-article' %}">{% translate 'Create article'%}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-secondary navbar-btn" type="button"  
-                        href="{% url 'my-articles' %}">{% translate 'My articles'%}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-secondary navbar-btn" type="button"  
-                        href="{% url 'update-user' %}">{% translate 'Account settings'%}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-secondary navbar-btn" type="button"  
-                        href="{% url 'logout' %}">{% translate 'Logout'%}</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+{% block navbar_item_margin %} me-auto {% endblock %}
 
-    {% block content %}
+{% block navbar_option_1 %}
+    {% with option_url='writer-dashboard' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
 
-    {% endblock %}
-</body>
-</html>
+{% block navbar_option_2 %}
+    {% with option_url='create-article' option_label='Create article' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block navbar_option_3 %}
+    {% with option_url='my-articles' option_label='My articles' %}
+         {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block navbar_option_4 %}
+    {% with option_url='update-writer' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block navbar_option_6 %}
+    {% with option_url='update-writer' %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+
 

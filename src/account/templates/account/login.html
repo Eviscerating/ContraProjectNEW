@@ -1,7 +1,14 @@
-{% extends 'account/_main.html'%}
+{% extends 'account/_main.html' %}
 {% load static %}
 {% load i18n %}
 {% load crispy_forms_tags %}
-{% block tab_title%} {%translate "Login"%} {%endblock%}
-{% block form_title%} {%translate "Login"%} {%endblock%}
-{% block form_body%} {{ login_form|crispy }} {%endblock%}
+
+{% block tab_title %} {% translate "Login" %} {% endblock %}
+{% block form_title %} {% translate "Login" %} {% endblock %}
+{% block form_body %} {{ login_form|crispy }} {% endblock %}
+{% block submit_action %} Login {% endblock %}
+
+{% block secondary_actions %}
+    <a href="{% url 'register' %}" class="btn btn-link">{% translate 'Register' %}</a>
+    <a href="{% url 'home' %}" class="btn btn-link">{% translate 'Home' %}</a>
+{% endblock %}

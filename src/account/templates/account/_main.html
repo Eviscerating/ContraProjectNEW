@@ -3,20 +3,10 @@
 {% load crispy_forms_tags %}
 <html>
     <head>
-        <title> {%translate "Register"%} </title>
-        <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/lux/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-    
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-            crossorigin="anonymous"
-            defer="true">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-            crossorigin="anonymous"
-            defer="true">
-        </script>
+        <title> {% block tab_title %} {% endblock %}</title>
+        {% block base_head_content %}
+            {% include 'common/_base_head_content.html' %}
+        {% endblock %}
     </head>
 <body>
     <div class="container bg-white shadow mt-5 p-5 form-layout">
@@ -25,9 +15,24 @@
     {% csrf_token %}
     
     {%block form_body%}
+
     {%endblock%}
-    <input type="submit" value="{% block submit_action %} {%translate 'Submit'%} {% endblock %}" class="btn btn-success">
-</div>
+
+        <div class="d-flex justify-content-between align-items-center">
+            <input type="submit" value="{% block submit_action %} {%translate 'Submit'%} {% endblock %}" 
+            class="btn btn-success">
+            <div>
+                {%block  secondary_actions%}
+                    <a href="{% url btn1_url %}" class="btn btn-link btn-light">
+                        {% translate btn1_text %}
+                    </a>
+
+                    <a href="{% url btn2_url %}" class="btn btn-link btn-light">
+                        {% translate btn2_text %}
+                    </a>
+                {%endblock%}
+        </div>
     </form>
+    </div>
 </body>
 </html>

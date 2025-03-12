@@ -3,3 +3,5 @@ crispy-bootstrap5
 uvicorn[standard]
 ptpython
 docopt
+httpx
+python-decouple

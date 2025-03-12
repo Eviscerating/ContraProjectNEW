@@ -7,11 +7,15 @@ import django.contrib.auth as auth
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from common.django_utils import arender, alogout
 from .models import CustomUser
+from common.auth import aanonymous_required
+from django.contrib.auth.decorators import login_required
 
 
+@aanonymous_required
 async def home(request:HttpRequest) -> HttpResponse:
-   return render (request, 'account/home.html', {'x':33})
+   return render (request, 'account/home.html')
 
+@aanonymous_required
 async def register(request:HttpRequest) -> HttpResponse:
    if request.method == 'POST':
        form = CustomUserCreationForm(request.POST)
@@ -24,7 +28,7 @@ async def register(request:HttpRequest) -> HttpResponse:
    context = {'register_form': form}
    return await arender (request, 'account/register.html', context)
     
-
+@aanonymous_required
 async def login(request:HttpRequest) -> HttpResponse:
    if request.method == 'POST':
       form = CustomAuthenticationForm(request.POST, data = request.POST)
@@ -48,6 +52,7 @@ async def login(request:HttpRequest) -> HttpResponse:
    context = {'login_form': form}
    return await arender (request, 'account/login.html', context)
 
+@login_required(login_url='login')
 async def logout(request: HttpRequest)-> HttpResponse:
    await alogout(request)
    return redirect('/')

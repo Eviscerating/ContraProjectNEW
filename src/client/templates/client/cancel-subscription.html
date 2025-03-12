@@ -1,0 +1,22 @@
+{% extends 'client/_main.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block content%}
+    <div class ="container bg-white shadow mt-5 p-5 form-layout ">
+        <h3 class="text-center">{% translate 'Cancel subscription' %}</h3>
+        <hr>
+        <p>{% translate "Are you sure you want to cancel your subscription? " %}</p>
+
+        <form method="POST" autocomplete="off" class="mt-5">
+            {% csrf_token %}
+
+            <h5>{{ subscription_plan }} {% translate 'subscription'%} </h5>
+            
+            <div class="d-flex justify-content-between align-items-center mt-5">
+            <input type="submit" class="btn btn-danger" value="{% translate 'Cancel subscription' %}">
+            <a href="{% url 'update-client' %}" class="btn btn-success">
+                {% translate 'Return' %}
+            </a>
+        </form>    
+    </div>
+{% endblock %}

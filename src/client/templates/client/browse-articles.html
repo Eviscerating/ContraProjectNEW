@@ -5,7 +5,7 @@
 {% block content%}
 {% if articles %}
     {% for article in articles %}
-    <div class ="container bg-white shadow mt-5 p-5 form_layout">
+    <div class ="container bg-white shadow mt-5 p-5 form-layout">
         <h3>{{ article.title }}</h3>
         <p>
             {{ article.content }}
@@ -23,11 +23,11 @@
     {% endfor %}
 
 {% elif has_subscription %}
-    <div class ="container bg-white shadow mt-5 p-5 form_layout">
+    <div class ="container bg-white shadow mt-5 p-5 form-layout">
         <h5>📖 {%translate 'No articles found for the given filters' %}</h5>
     </div>
 {% else %}
-    <div class ="container bg-white shadow mt-5 p-5 form_layout">
+    <div class ="container bg-white shadow mt-5 p-5 form-layout">
         <h5>📖 {%translate 'Hi! Thanks for being a registered user!' %}</h5>
         <p>
         <strong><em>🔒 {%translate 'Subscribe to access premium articles' %}</em></strong>

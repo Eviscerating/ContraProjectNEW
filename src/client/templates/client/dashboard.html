@@ -2,14 +2,13 @@
 {% load i18n %}
 
 {% block content%}
-<div class ="container bg-white shadow mt-5 p-5 form_layout text_center">
+<div class ="container bg-white shadow mt-5 p-5 form-layout text-center">
     <h3> 📖 {%translate 'Welcome back,' %} {{ user.first_name }}</h3>
 </div>
 
-<div class ="container bg-white shadow mt-5 p-5 form_layout text_center">
+<div class ="container bg-white shadow mt-5 p-5 form-layout text-center">
     <h5>{%translate 'Subscription status:' %}</h5>
     <hr>
-    <p>
-        {% translate subscription_plan %}
-    </p>
+        <h4>💸{% translate subscription_plan %}</h4>
+</div>
 {% endblock %}

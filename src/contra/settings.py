@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import decouple
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -65,7 +66,7 @@ ROOT_URLCONF = 'contra.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR / 'common' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,3 +134,8 @@ STATICFILES_DIRS =[ BASE_DIR / 'static' ]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PAYPAL_CLIENT_ID : str = decouple.config('PAYPAL_CLIENT_ID') # type: ignore
+PAYPAL_SECRET_ID : str = decouple.config('PAYPAL_SECRET_ID') # type: ignore
+PAYPAL_AUTH_URL : str = decouple.config('PAYPAL_AUTH_URL') # type: ignore
+PAYPAL_BILLING_SUBSCRIPTIONS_URL : str = decouple.config('PAYPAL_BILLING_SUBSCRIPTIONS_URL') # type: ignore

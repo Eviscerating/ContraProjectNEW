@@ -4,7 +4,7 @@
 
 {% block content%}
     {% for article in my_articles %}
-    <div class ="container bg-white shadow mt-5 p-5 form_layout">
+    <div class ="container bg-white shadow mt-5 p-5 form-layout">
         <h3>{{ article.title }}</h3>
         <p>
             {{ article.content }}
@@ -27,9 +27,7 @@
                 {% translate 'Delete article' %}
             </a>
          </div>
-            <a href="{% url 'delete-article' article.id %}" class="btn btn-link btn-light">
-                {% translate 'Delete article' %}
-            </a>
+
         </div>
     </div>
     {% endfor %}
