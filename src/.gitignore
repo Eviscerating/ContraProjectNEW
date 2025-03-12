@@ -91,5 +91,5 @@ yarn-error.log
 
 # Other #
 #########
-*.env
-*.venv
+.env
+.venv
