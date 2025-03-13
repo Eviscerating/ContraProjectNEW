@@ -1,12 +1,14 @@
 from typing import Iterable
 
 from django import forms
-from django.forms import Form
+from django.forms import Form, ModelForm
 from django.utils.translation import gettext_lazy as _t
 from asgiref.sync import sync_to_async
 
 from common.django_utils import AsyncModelFormMixin
 from .models import PlanChoice, Subscription
+from account.models import CustomUser
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 class UpdateSubscriptionForm(Form, AsyncModelFormMixin):
@@ -31,3 +33,23 @@ class UpdateSubscriptionForm(Form, AsyncModelFormMixin):
             return UpdateSubscriptionForm(*args, **kwargs)
         
         return await call_init()
+
+
+class UpdateUserForm(ModelForm, AsyncModelFormMixin):
+    class Meta:
+        model = CustomUser
+        fields = (
+            'email',
+            'first_name',
+            'last_name',
+        )
+
+
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['old_password'].widget.attrs.update({'class': 'form-control'})
+        self.fields['new_password1'].widget.attrs.update({'class': 'form-control'})
+        self.fields['new_password2'].widget.attrs.update({'class': 'form-control'})

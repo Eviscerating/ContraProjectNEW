@@ -3,8 +3,10 @@ from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import aget_user
+from asgiref.sync import sync_to_async
+from django.contrib.auth import update_session_auth_hash
 
-from .forms import ArticleForm, UpdateUserForm
+from .forms import ArticleForm, UpdateUserForm, CustomPasswordChangeForm
 from common.django_utils import arender
 from common.auth import awriter_required, ensure_for_current_user
 from .models import Article
@@ -83,3 +85,20 @@ async def delete_user(request: HttpRequest) -> HttpResponse:
         return redirect('home')
     
     return await arender(request, 'writer/delete-user.html')
+
+@awriter_required
+async def change_password(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        form = await sync_to_async(lambda: CustomPasswordChangeForm(user=request.user, data=request.POST), thread_sensitive=True)()
+        
+        if await sync_to_async(form.is_valid, thread_sensitive=True)():
+            user = await sync_to_async(form.save, thread_sensitive=True)()
+            
+            await sync_to_async(update_session_auth_hash, thread_sensitive=True)(request, user)
+            
+            return redirect('writer-dashboard')
+    
+    else:
+        form = await sync_to_async(lambda: CustomPasswordChangeForm(user=request.user), thread_sensitive=True)()
+
+    return await arender(request, 'writer/change-password.html', {'form': form})

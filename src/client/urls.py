@@ -6,6 +6,7 @@ urlpatterns = [
     path('browse-articles/', views.browse_articles, name='browse-articles'),
     path('subscribe-plan/', views.subscribe_plan, name='subscribe-plan'),
     path('update-user/', views.update_user, name = 'update-client'),
+    
     path('create-subscription/<str:sub_id>/<str:plan_code>', 
          views.create_subscription, 
          name = 'create-subscription'
@@ -19,4 +20,10 @@ urlpatterns = [
          name = 'update-subscription'
     ),
     
+    path('update-subscription-confirmed/', 
+         views.update_subscription_confirmed, 
+         name = 'update-subscription-confirmed'
+    ),
+    path('delete-user/', views.delete_user, name='client-delete-user'),
+    path('change-password/', views.change_password, name='client-change-password'),
 ]
